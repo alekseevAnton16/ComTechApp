@@ -1,5 +1,3 @@
-using System;
-
 namespace ComTechNetCoreApp.Models
 {
     public class ErrorViewModel

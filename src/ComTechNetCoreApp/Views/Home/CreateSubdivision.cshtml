@@ -1,0 +1,38 @@
+﻿@using ComTechNetCoreApp.Models
+@using ComTechNetCoreApp.Models.Enums
+@model ComTechNetCoreApp.Models.Subdivision
+@{
+    ViewData["Title"] = "CreateSubdivision";
+}
+
+<h2>Создание кафедры</h2>
+<form asp-action="CreateSubdivision" asp-controller="Home" method="post">
+    <input type="hidden" name="@nameof(Subdivision.SubdivisionId)"/>
+    <table>
+        <tr>
+            <td>
+               <label asp-for="SubdivisionName"></label>
+            </td>
+            <td>
+                <input asp-for="SubdivisionName"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <label asp-for="SubdivisionСreateYear"></label>
+            </td>
+            <td>
+                <input asp-for="SubdivisionСreateYear" asp-format="{yyyy}" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label asp-for="Faculty"></label>
+            </td>
+            <td>
+                <select asp-for="Faculty" asp-items="Html.GetEnumSelectList<EFaculty>()" class="form-control"></select>
+            </td>
+        </tr>
+    </table>
+</form>
+

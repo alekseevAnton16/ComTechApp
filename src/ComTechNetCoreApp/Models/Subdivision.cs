@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using ComTechNetCoreApp.Models.Enums;
 
 namespace ComTechNetCoreApp.Models
@@ -25,13 +26,14 @@ namespace ComTechNetCoreApp.Models
 		/// </summary>
 		[Display(Name = "Год основания кафедры")]
 		[Required]
-		public int SubdivisionСreateYear { get; set; }
+		public DateTime SubdivisionСreateYear { get; set; }
 
 		/// <summary>
 		/// Факультет.
 		/// </summary>
 		[Display(Name = "Факультет")]
 		[Required]
+		[EnumDataType(typeof(EFaculty))]
 		public EFaculty Faculty { get; set; }
 	}
 }
