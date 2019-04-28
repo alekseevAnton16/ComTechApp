@@ -1,0 +1,37 @@
+﻿@using System.Collections
+@model ComTechNetCoreApp.Models.Subdivision
+@{
+    ViewData["Title"] = "GetSubdivisionAndLecturers";
+}
+
+<h3>Кафедра</h3>
+<table>
+    <tr>
+        <td> <label asp-for="SubdivisionName"></label></td>
+        <td> <label asp-for="SubdivisionСreateYear"></label></td>
+        <td><label asp-for="Faculty"></label></td>
+    </tr>
+    <tr>
+        <td>@Model.SubdivisionName</td>
+        <td>@Model.SubdivisionСreateYear.ToString("yyyy")</td>
+        <td>@Model.Faculty</td>
+    </tr>
+</table>
+@if (ViewBag.Lecturers is IEnumerable<Lecturer>)
+{
+    <h3>Преподаватели кафедры</h3>
+    <table>
+        <tr>
+            <td>ФИО</td>
+            <td>Должность</td>
+        </tr>
+        @foreach (var lecturer in ViewBag.Lecturers as IEnumerable<Lecturer>)
+        {
+            <tr>
+                <td>@($"{lecturer.Surname} {lecturer.Name} {lecturer.Patronymic ?? ""}")</td>
+                <td>@lecturer.Position</td>
+            </tr>
+        }
+    </table>
+}
+

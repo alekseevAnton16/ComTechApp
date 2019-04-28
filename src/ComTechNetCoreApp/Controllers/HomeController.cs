@@ -22,10 +22,49 @@ namespace ComTechNetCoreApp.Controllers
 
 		#region Subdivision
 
+		[HttpGet]
 		public IActionResult GetAllSubdivisions()
 		{
 			var allSubdivisions = _dbContext.Subdivisions.ToList();
 			return View(allSubdivisions);
+		}
+
+		public IActionResult GetSubdivisionAndLecturers(int subdivisionId)
+		{
+			var subdivision = _dbContext.Subdivisions.Find(subdivisionId);
+			if (subdivision == null)
+			{
+				return StatusCode(404);
+			}
+
+			var lecturers = _dbContext.Lecturers.Where(x => x.SubdivisionId == subdivisionId);
+			ViewBag.Lecturers = lecturers;
+			return View(subdivision);
+		}
+
+		[HttpGet]
+		public IActionResult EditSubdivision(int id)
+		{
+			var subdivision = _dbContext.Subdivisions.Find(id);
+			if (subdivision == null)
+			{
+				return StatusCode(404);
+			}
+
+			return View(nameof(CreateSubdivision), subdivision);
+		}
+
+		public IActionResult DeleteSubdivision(int id)
+		{
+			var subdivision = _dbContext.Subdivisions.Find(id);
+			if (subdivision == null)
+			{
+				return StatusCode(404);
+			}
+
+			_dbContext.Subdivisions.Remove(subdivision);
+			_dbContext.SaveChanges();
+			return RedirectToAction(nameof(Index));
 		}
 
 		[HttpGet]
@@ -45,11 +84,10 @@ namespace ComTechNetCoreApp.Controllers
 
 			_dbContext.Subdivisions.Add(subdivision);
 			_dbContext.SaveChanges();
-			return RedirectToAction("Index");
+			return RedirectToAction(nameof(Index));
 		}
 
 		#endregion
-
 		
 
 		public IActionResult Error()
