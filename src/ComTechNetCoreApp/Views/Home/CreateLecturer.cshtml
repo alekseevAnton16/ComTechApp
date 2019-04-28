@@ -1,0 +1,75 @@
+﻿@model ComTechNetCoreApp.Models.Lecturer
+@{
+    ViewData["Title"] = "CreateLecturer";
+}
+
+<h2>Добавление/изменение преподавателя</h2>
+<form asp-action="CreateLecturer" asp-controller="Home" method="post">
+    <input type="hidden" name="@nameof(Lecturer.LecturerId)"/>
+    <table>
+        <tr>
+            <td>
+                <label asp-for="Surname"></label>
+            </td>
+            <td>
+                <input asp-for="Surname" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label asp-for="Name"></label>
+            </td>
+            <td>
+                <input asp-for="Name" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label asp-for="Patronymic"></label>
+            </td>
+            <td>
+                <input asp-for="Patronymic" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label asp-for="Position"></label>
+            </td>
+            <td>
+                <input asp-for="Position" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label asp-for="ScienceGrade"></label>
+            </td>
+            <td>
+                <input asp-for="ScienceGrade" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label asp-for="Subdivision"></label>
+            </td>
+            <td>
+                <select asp-for="SubdivisionId" asp-items="@(new SelectList(ViewBag.AllSubdivisions, nameof(Subdivision.SubdivisionId), nameof(Subdivision.SubdivisionName)))" class="form-control"></select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label asp-for="WorkStartDate"></label>
+            </td>
+            <td>
+                <input asp-for="WorkStartDate" asp-format="{yyyy}" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label asp-for="Description"></label>
+            </td>
+            <td>
+                <input asp-for="Description" />
+            </td>
+        </tr>
+    </table>
+</form>

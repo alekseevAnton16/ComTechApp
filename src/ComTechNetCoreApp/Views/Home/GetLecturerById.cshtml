@@ -1,0 +1,28 @@
+﻿@model ComTechNetCoreApp.Models.Lecturer
+@{
+    ViewData["Title"] = "GetLecturerById";
+}
+
+<h2>Преподаватель</h2>
+<table>
+    <tr>
+        <td><label asp-for="Surname"></label></td>
+        <td><label asp-for="Name"></label></td>
+        <td><label asp-for="Patronymic"></label></td>
+        <td><label asp-for="ScienceGrade"></label></td>
+        <td><label asp-for="Position"></label></td>
+        <td><label asp-for="WorkStartDate"></label></td>
+        <td><label asp-for="Subdivision"></label></td>
+        <td><label asp-for="Description"></label></td>
+    </tr>
+    <tr>
+        <td>@Model.Surname</td>
+        <td>@Model.Name</td>
+        <td>@Model.Patronymic</td>
+        <td>@Model.ScienceGrade</td>
+        <td>@Model.Position</td>
+        <td>@Model.WorkStartDate</td>
+        <td>@Model.Subdivision</td>
+        <td>@Model.Description</td>
+    </tr>
+</table>

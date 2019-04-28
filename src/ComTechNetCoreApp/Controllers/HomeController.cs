@@ -3,6 +3,7 @@ using System.Linq;
 using ComTechNetCoreApp.Data;
 using Microsoft.AspNetCore.Mvc;
 using ComTechNetCoreApp.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace ComTechNetCoreApp.Controllers
 {
@@ -88,7 +89,74 @@ namespace ComTechNetCoreApp.Controllers
 		}
 
 		#endregion
-		
+
+		#region Lecturer
+
+		public IActionResult GetLecturerById(int id)
+		{
+			var lecturer = _dbContext.Lecturers.Find(id);
+			if (lecturer == null)
+			{
+				return StatusCode(404);
+			}
+
+			var subdivision = _dbContext.Subdivisions.Find(lecturer.SubdivisionId);
+			if (subdivision != null)
+			{
+				lecturer.Subdivision = subdivision;
+			}
+
+			return View(lecturer);
+		}
+
+		[HttpGet]
+		public IActionResult EditLecturer(int id)
+		{
+			var lecturer = _dbContext.Lecturers.Find(id);
+			if (lecturer == null)
+			{
+				return StatusCode(404);
+			}
+
+			return View(nameof(CreateLecturer), lecturer);
+		}
+
+		public IActionResult DeleteLecturer(int id)
+		{
+			var lecturer = _dbContext.Lecturers.Find(id);
+			if (lecturer == null)
+			{
+				return StatusCode(404);
+			}
+
+			_dbContext.Lecturers.Remove(lecturer);
+			_dbContext.SaveChanges();
+			return RedirectToAction(nameof(Index));
+		}
+
+		[HttpGet]
+		public IActionResult CreateLecturer()
+		{
+			var newLecturer = new Lecturer();
+			var allSubdivisions = _dbContext.Subdivisions.ToList();
+			ViewBag.AllSubdivisions = allSubdivisions;
+			return View(newLecturer);
+		}
+
+		[HttpPost]
+		public IActionResult CreateLecturer(Lecturer lecturer)
+		{
+			if (!ModelState.IsValid)
+			{
+				return StatusCode(403);
+			}
+
+			_dbContext.Lecturers.Add(lecturer);
+			_dbContext.SaveChanges();
+			return RedirectToAction(nameof(Index));
+		}
+
+		#endregion
 
 		public IActionResult Error()
 		{
