@@ -1,0 +1,21 @@
+﻿@model IEnumerable<ComTechNetCoreApp.Models.Subdivision>
+@{
+    ViewData["Title"] = "GetAllSubdivisions";
+}
+
+<h2>Список всех кафедр.</h2>
+<table>
+    <tr>
+        <td>Наименование</td>
+        <td>Год основания</td>
+        <td>Факультет</td>
+    </tr>
+    @foreach (var subdivision in Model)
+    {
+        <tr>
+            <td>@subdivision.SubdivisionName</td>
+            <td>@subdivision.SubdivisionСreateYear.ToString("yyyy")</td>
+            <td>@subdivision.Faculty</td>
+        </tr>
+    }
+</table>
