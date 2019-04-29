@@ -37,7 +37,7 @@ namespace ComTechNetCoreApp.Models
 		/// </summary>
 		[Display(Name = "Имя")]
 		[Required]
-		public string Name { get; set; }
+		public string FirstName { get; set; }
 
 		/// <summary>
 		/// Отчество.
@@ -62,7 +62,7 @@ namespace ComTechNetCoreApp.Models
 		/// Дополнительные сведения.
 		/// </summary>
 		[Display(Name = "Дополнительные сведения")]
-		public string Description { get; set; }
+		public string Note { get; set; }
 
 		/// <summary>
 		/// Кафедра.

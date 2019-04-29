@@ -28,7 +28,7 @@
         @foreach (var lecturer in ViewBag.Lecturers as IEnumerable<Lecturer>)
         {
             <tr>
-                <td>@($"{lecturer.Surname} {lecturer.Name} {lecturer.Patronymic ?? ""}")</td>
+                <td>@($"{lecturer.Surname} {lecturer.FirstName} {lecturer.Patronymic ?? ""}")</td>
                 <td>@lecturer.Position</td>
             </tr>
         }
