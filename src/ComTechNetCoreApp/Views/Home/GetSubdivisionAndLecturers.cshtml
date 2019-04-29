@@ -14,7 +14,7 @@
     <tr>
         <td>@Model.SubdivisionName</td>
         <td>@Model.SubdivisionСreateYear.ToString("yyyy")</td>
-        <td>@Model.Faculty</td>
+        <td>@(CStatic.GetDisplayName(Model.Faculty))</td>
     </tr>
 </table>
 @if (ViewBag.Lecturers is IEnumerable<Lecturer>)

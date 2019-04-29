@@ -10,10 +10,8 @@
         <td>Имя</td>
         <td>Отчество</td>
         <td>Должность</td>
-        <td>Научное звание</td>
         <td>Кафедра</td>
-        <td>Дата начала работы на кафедре</td>
-        <td>Дополнительные сведения</td>
+        <td></td>
     </tr>
     @foreach (var lecturer in Model)
     {
@@ -22,10 +20,8 @@
             <td>@lecturer.FirstName</td>
             <td>@(lecturer.Patronymic ?? "-")</td>
             <td>@lecturer.Position</td>
-            <td>@lecturer.ScienceGrade</td>
             <td>@(lecturer.Subdivision?.SubdivisionName ?? "-")</td>
-            <td>@lecturer.WorkStartDate.ToString("yyyy")</td>
-            <td>@lecturer.Note</td>
+            <td><button type="button" onclick="location.href = '@Url.Action("GetLecturerById", "Home", new {id = lecturer.LecturerId})'">Подробнее</button></td>
         </tr>
     }
 </table>

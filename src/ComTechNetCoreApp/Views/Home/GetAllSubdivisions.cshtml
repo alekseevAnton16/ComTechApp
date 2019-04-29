@@ -1,4 +1,5 @@
-﻿@model IEnumerable<ComTechNetCoreApp.Models.Subdivision>
+﻿@using System.ComponentModel.DataAnnotations
+@model IEnumerable<ComTechNetCoreApp.Models.Subdivision>
 @{
     ViewData["Title"] = "GetAllSubdivisions";
 }
@@ -9,13 +10,15 @@
         <td>Наименование</td>
         <td>Год основания</td>
         <td>Факультет</td>
+        <td></td>
     </tr>
     @foreach (var subdivision in Model)
     {
         <tr>
             <td>@subdivision.SubdivisionName</td>
             <td>@subdivision.SubdivisionСreateYear.ToString("yyyy")</td>
-            <td>@subdivision.Faculty</td>
+            <td>@(CStatic.GetDisplayName(subdivision.Faculty))</td>
+            <td><button type="button" onclick="location.href = '@Url.Action("GetSubdivisionAndLecturers", "Home", new {subdivisionId = subdivision.SubdivisionId})'">Подробнее</button></td>
         </tr>
     }
 </table>

@@ -99,6 +99,7 @@ namespace ComTechNetCoreApp.Controllers
 			return View(allLecturers);
 		}
 
+		[HttpGet]
 		public IActionResult GetLecturerById(int id)
 		{
 			var lecturer = _dbContext.Lecturers.Find(id);
