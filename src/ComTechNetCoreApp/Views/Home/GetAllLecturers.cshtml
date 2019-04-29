@@ -1,0 +1,31 @@
+﻿@model IEnumerable<ComTechNetCoreApp.Models.Lecturer>
+@{
+    ViewData["Title"] = "GetAllLecturers";
+}
+
+<h2>Список всех преподавателей.</h2>
+<table>
+    <tr>
+        <td>Фамилия</td>
+        <td>Имя</td>
+        <td>Отчество</td>
+        <td>Должность</td>
+        <td>Научное звание</td>
+        <td>Кафедра</td>
+        <td>Дата начала работы на кафедре</td>
+        <td>Дополнительные сведения</td>
+    </tr>
+    @foreach (var lecturer in Model)
+    {
+        <tr>
+            <td>@lecturer.Surname</td>
+            <td>@lecturer.FirstName</td>
+            <td>@(lecturer.Patronymic ?? "-")</td>
+            <td>@lecturer.Position</td>
+            <td>@lecturer.ScienceGrade</td>
+            <td>@(lecturer.Subdivision?.SubdivisionName ?? "-")</td>
+            <td>@lecturer.WorkStartDate.ToString("yyyy")</td>
+            <td>@lecturer.Note</td>
+        </tr>
+    }
+</table>

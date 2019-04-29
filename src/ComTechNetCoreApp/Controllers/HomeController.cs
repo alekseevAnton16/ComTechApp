@@ -92,6 +92,13 @@ namespace ComTechNetCoreApp.Controllers
 
 		#region Lecturer
 
+		[HttpGet]
+		public IActionResult GetAllLecturers()
+		{
+			var allLecturers = _dbContext.Lecturers.ToList();
+			return View(allLecturers);
+		}
+
 		public IActionResult GetLecturerById(int id)
 		{
 			var lecturer = _dbContext.Lecturers.Find(id);
