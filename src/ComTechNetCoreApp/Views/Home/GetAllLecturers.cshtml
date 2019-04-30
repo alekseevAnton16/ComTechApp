@@ -13,6 +13,7 @@
         <td>Кафедра</td>
         <td></td>
         <td></td>
+        <td></td>
     </tr>
     @foreach (var lecturer in Model)
     {
@@ -24,6 +25,7 @@
         <td>@(lecturer.Subdivision?.SubdivisionName ?? "-")</td>
         <td><button type="button" onclick="location.href = '@Url.Action("GetLecturerById", "Home", new {id = lecturer.LecturerId})'">Подробнее</button></td>
         <td><button type="button" onclick="location.href = '@Url.Action("EditLecturer", "Home", new {id = lecturer.LecturerId})'">Редактировать</button></td>
+        <td><button type="button" onclick="location.href = '@Url.Action("DeleteLecturer", "Home", new {id = lecturer.LecturerId})'">Удалить</button></td>
     </tr>
     }
 </table>

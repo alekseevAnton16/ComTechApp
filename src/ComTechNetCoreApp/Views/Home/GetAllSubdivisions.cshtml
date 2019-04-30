@@ -12,16 +12,18 @@
         <td>Факультет</td>
         <td></td>
         <td></td>
+        <td></td>
     </tr>
     @foreach (var subdivision in Model)
     {
-        <tr>
-            <td>@subdivision.SubdivisionName</td>
-            <td>@subdivision.SubdivisionСreateYear.ToString("yyyy")</td>
-            <td>@(CStatic.GetDisplayName(subdivision.Faculty))</td>
-            <td><button type="button" onclick="location.href = '@Url.Action("GetSubdivisionAndLecturers", "Home", new {subdivisionId = subdivision.SubdivisionId})'">Подробнее</button></td>
-            <td><button type="button" onclick="location.href = '@Url.Action("EditSubdivision", "Home", new {id = subdivision.SubdivisionId})'">Редактировать</button></td>
-        </tr>
+    <tr>
+        <td>@subdivision.SubdivisionName</td>
+        <td>@subdivision.SubdivisionСreateYear.ToString("yyyy")</td>
+        <td>@(CStatic.GetDisplayName(subdivision.Faculty))</td>
+        <td><button type="button" onclick="location.href = '@Url.Action("GetSubdivisionAndLecturers", "Home", new {subdivisionId = subdivision.SubdivisionId})'">Подробнее</button></td>
+        <td><button type="button" onclick="location.href = '@Url.Action("EditSubdivision", "Home", new {id = subdivision.SubdivisionId})'">Редактировать</button></td>
+        <td><button type="button" onclick="location.href = '@Url.Action("DeleteSubdivision", "Home", new {id = subdivision.SubdivisionId})'">Удалить</button></td>
+    </tr>
     }
 </table>
 <br/>

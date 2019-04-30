@@ -14,7 +14,10 @@
                 <label asp-for="SubdivisionName"></label>
             </td>
             <td>
-                <input asp-for="SubdivisionName"/>
+                <div>
+                    <input asp-for="SubdivisionName"/>
+                    <span asp-validation-for="SubdivisionName"></span>
+                </div>
             </td>
         </tr>
         <tr>
@@ -23,6 +26,7 @@
             </td>
             <td>
                 <input asp-for="SubdivisionСreateYear" asp-format="{0:dd/MM/yyyy}"/>
+                <span asp-validation-for="SubdivisionСreateYear" />
             </td>
         </tr>
         <tr>
@@ -37,4 +41,22 @@
     <br/>
     <input type="submit" value="Обновить БД"/>
 </form>
+
+@section scripts{
+ 
+    <environment names="Development">
+    </environment>
+        <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <environment names="Staging,Production">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"
+                asp-fallback-src="~/lib/jquery-validation/dist/jquery.validate.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.validator">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"
+                asp-fallback-src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.validator && window.jQuery.validator.unobtrusive">
+        </script>
+    </environment>
+}
 
