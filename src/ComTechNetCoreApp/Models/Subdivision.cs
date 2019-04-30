@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using ComTechNetCoreApp.Models.Enums;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ComTechNetCoreApp.Models
 {
@@ -12,6 +13,7 @@ namespace ComTechNetCoreApp.Models
 		/// <summary>
 		/// Уникальный идентификатор кафедры.
 		/// </summary>
+		[HiddenInput(DisplayValue = false)]
 		public int SubdivisionId { get; set; }
 
 		/// <summary>
@@ -19,6 +21,7 @@ namespace ComTechNetCoreApp.Models
 		/// </summary>
 		[Display(Name = "Наименование кафедры")]
 		[Required]
+		[StringLength(100)]
 		public string SubdivisionName { get; set; }
 
 		/// <summary>

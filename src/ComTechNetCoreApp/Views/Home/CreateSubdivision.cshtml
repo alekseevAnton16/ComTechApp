@@ -14,10 +14,8 @@
                 <label asp-for="SubdivisionName"></label>
             </td>
             <td>
-                <div>
                     <input asp-for="SubdivisionName"/>
-                    <span asp-validation-for="SubdivisionName"></span>
-                </div>
+                    <span asp-validation-for="SubdivisionName" class="text-danger"></span>
             </td>
         </tr>
         <tr>
@@ -26,7 +24,7 @@
             </td>
             <td>
                 <input asp-for="SubdivisionСreateYear" asp-format="{0:dd/MM/yyyy}"/>
-                <span asp-validation-for="SubdivisionСreateYear" />
+                <span asp-validation-for="SubdivisionСreateYear" class="text-danger"/>
             </td>
         </tr>
         <tr>

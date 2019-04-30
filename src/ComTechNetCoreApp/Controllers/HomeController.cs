@@ -87,7 +87,7 @@ namespace ComTechNetCoreApp.Controllers
 		public IActionResult CreateSubdivision(Subdivision subdivision)
 		{
 			CStatic.Logger.Trace($"Start {nameof(CreateSubdivision)}");
-			if (!ModelState.IsValid)
+			if (!ModelState.IsValid || subdivision.SubdivisionСreateYear == default(DateTime))
 			{
 				CStatic.Logger.Warn($"Method {nameof(CreateSubdivision)}: model is invalid");
 				return StatusCode(403);
@@ -186,7 +186,7 @@ namespace ComTechNetCoreApp.Controllers
 		public IActionResult CreateLecturer(Lecturer lecturer)
 		{
 			CStatic.Logger.Trace($"Start {nameof(CreateLecturer)}");
-			if (!ModelState.IsValid)
+			if (!ModelState.IsValid || lecturer.WorkStartDate == default(DateTime))
 			{
 				CStatic.Logger.Warn($"Method {nameof(CreateLecturer)}: model is invalid");
 				return StatusCode(403);

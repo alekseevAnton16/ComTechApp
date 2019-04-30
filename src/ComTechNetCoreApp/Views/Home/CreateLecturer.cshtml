@@ -13,6 +13,7 @@
             </td>
             <td>
                 <input asp-for="Surname" />
+                <span asp-validation-for="Surname" class="text-danger"></span>
             </td>
         </tr>
         <tr>
@@ -21,6 +22,7 @@
             </td>
             <td>
                 <input asp-for="FirstName" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
             </td>
         </tr>
         <tr>
@@ -37,6 +39,7 @@
             </td>
             <td>
                 <input asp-for="Position" />
+                <span asp-validation-for="Position" class="text-danger"></span>
             </td>
         </tr>
         <tr>
@@ -61,6 +64,7 @@
             </td>
             <td>
                 <input asp-for="WorkStartDate" asp-format="{0:dd/MM/yyyy}" />
+                <span asp-validation-for="WorkStartDate" class="text-danger"></span>
             </td>
         </tr>
         <tr>
