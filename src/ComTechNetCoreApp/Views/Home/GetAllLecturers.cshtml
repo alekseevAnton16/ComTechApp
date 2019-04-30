@@ -12,16 +12,20 @@
         <td>Должность</td>
         <td>Кафедра</td>
         <td></td>
+        <td></td>
     </tr>
     @foreach (var lecturer in Model)
     {
-        <tr>
-            <td>@lecturer.Surname</td>
-            <td>@lecturer.FirstName</td>
-            <td>@(lecturer.Patronymic ?? "-")</td>
-            <td>@lecturer.Position</td>
-            <td>@(lecturer.Subdivision?.SubdivisionName ?? "-")</td>
-            <td><button type="button" onclick="location.href = '@Url.Action("GetLecturerById", "Home", new {id = lecturer.LecturerId})'">Подробнее</button></td>
-        </tr>
+    <tr>
+        <td>@lecturer.Surname</td>
+        <td>@lecturer.FirstName</td>
+        <td>@(lecturer.Patronymic ?? "-")</td>
+        <td>@lecturer.Position</td>
+        <td>@(lecturer.Subdivision?.SubdivisionName ?? "-")</td>
+        <td><button type="button" onclick="location.href = '@Url.Action("GetLecturerById", "Home", new {id = lecturer.LecturerId})'">Подробнее</button></td>
+        <td><button type="button" onclick="location.href = '@Url.Action("EditLecturer", "Home", new {id = lecturer.LecturerId})'">Редактировать</button></td>
+    </tr>
     }
 </table>
+<br/>
+<button type="button" onclick="location.href = '@Url.Action("CreateLecturer", "Home")'">Добавить преподавателя</button>

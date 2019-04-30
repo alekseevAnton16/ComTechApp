@@ -11,6 +11,7 @@
         <td>Год основания</td>
         <td>Факультет</td>
         <td></td>
+        <td></td>
     </tr>
     @foreach (var subdivision in Model)
     {
@@ -19,6 +20,9 @@
             <td>@subdivision.SubdivisionСreateYear.ToString("yyyy")</td>
             <td>@(CStatic.GetDisplayName(subdivision.Faculty))</td>
             <td><button type="button" onclick="location.href = '@Url.Action("GetSubdivisionAndLecturers", "Home", new {subdivisionId = subdivision.SubdivisionId})'">Подробнее</button></td>
+            <td><button type="button" onclick="location.href = '@Url.Action("EditSubdivision", "Home", new {id = subdivision.SubdivisionId})'">Редактировать</button></td>
         </tr>
     }
 </table>
+<br/>
+<button type="button" onclick="location.href = '@Url.Action("CreateSubdivision", "Home")'">Добавить кафедру</button>

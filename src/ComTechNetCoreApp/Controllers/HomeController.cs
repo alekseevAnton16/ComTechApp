@@ -126,6 +126,9 @@ namespace ComTechNetCoreApp.Controllers
 				return StatusCode(404);
 			}
 
+			var allSubdivisions = _dbContext.Subdivisions.ToList();
+			ViewBag.AllSubdivisions = allSubdivisions;
+
 			return View(nameof(CreateLecturer), lecturer);
 		}
 
