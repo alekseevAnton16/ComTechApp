@@ -7,11 +7,11 @@
 
 <h2>Добавление/изменение кафедры</h2>
 <form asp-action="CreateSubdivision" asp-controller="Home" method="post">
-    <input type="hidden" name="@nameof(Subdivision.SubdivisionId)"/>
+    <input type="hidden" asp-for="SubdivisionId"/>
     <table>
         <tr>
             <td>
-               <label asp-for="SubdivisionName"></label>
+                <label asp-for="SubdivisionName"></label>
             </td>
             <td>
                 <input asp-for="SubdivisionName"/>
@@ -19,7 +19,7 @@
         </tr>
         <tr>
             <td>
-              <label asp-for="SubdivisionСreateYear"></label>
+                <label asp-for="SubdivisionСreateYear"></label>
             </td>
             <td>
                 <input asp-for="SubdivisionСreateYear" asp-format="{0:dd/MM/yyyy}"/>
@@ -34,5 +34,7 @@
             </td>
         </tr>
     </table>
+    <br/>
+    <input type="submit" value="Обновить БД"/>
 </form>
 

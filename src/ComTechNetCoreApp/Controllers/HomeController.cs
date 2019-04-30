@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using ComTechNetCoreApp.Data;
 using Microsoft.AspNetCore.Mvc;
@@ -83,9 +84,21 @@ namespace ComTechNetCoreApp.Controllers
 				return StatusCode(403);
 			}
 
-			_dbContext.Subdivisions.Add(subdivision);
+			var subdivisionInDb = _dbContext.Subdivisions.Find(subdivision.SubdivisionId);
+			if (subdivisionInDb == null)
+			{
+				_dbContext.Subdivisions.Add(subdivision);
+			}
+			else
+			{
+				subdivisionInDb.SubdivisionName = subdivision.SubdivisionName;
+				subdivisionInDb.SubdivisionСreateYear = subdivision.SubdivisionСreateYear;
+				subdivisionInDb.Faculty = subdivision.Faculty;
+				_dbContext.Update(subdivisionInDb);
+			}
+
 			_dbContext.SaveChanges();
-			return RedirectToAction(nameof(Index));
+			return RedirectToAction(nameof(GetAllSubdivisions));
 		}
 
 		#endregion
@@ -95,6 +108,7 @@ namespace ComTechNetCoreApp.Controllers
 		[HttpGet]
 		public IActionResult GetAllLecturers()
 		{
+			IncludeReferencedFieldsToLecturers();
 			var allLecturers = _dbContext.Lecturers.ToList();
 			return View(allLecturers);
 		}
@@ -125,7 +139,7 @@ namespace ComTechNetCoreApp.Controllers
 			{
 				return StatusCode(404);
 			}
-
+			
 			var allSubdivisions = _dbContext.Subdivisions.ToList();
 			ViewBag.AllSubdivisions = allSubdivisions;
 
@@ -162,9 +176,26 @@ namespace ComTechNetCoreApp.Controllers
 				return StatusCode(403);
 			}
 
-			_dbContext.Lecturers.Add(lecturer);
+			var lecturerInDb = _dbContext.Lecturers.Find(lecturer.LecturerId);
+			if (lecturerInDb == null)
+			{
+				_dbContext.Lecturers.Add(lecturer);
+			}
+			else
+			{
+				lecturerInDb.Surname = lecturer.Surname;
+				lecturerInDb.FirstName = lecturer.FirstName;
+				lecturerInDb.Patronymic = lecturer.Patronymic;
+				lecturerInDb.Position = lecturer.Position;
+				lecturerInDb.ScienceGrade = lecturer.ScienceGrade;
+				lecturerInDb.Note = lecturer.Note;
+				lecturerInDb.WorkStartDate = lecturer.WorkStartDate;
+				lecturerInDb.Subdivision = lecturer.Subdivision;
+				_dbContext.Lecturers.Update(lecturerInDb);
+			}
+
 			_dbContext.SaveChanges();
-			return RedirectToAction(nameof(Index));
+			return RedirectToAction(nameof(GetAllLecturers));
 		}
 
 		#endregion
@@ -172,6 +203,22 @@ namespace ComTechNetCoreApp.Controllers
 		public IActionResult Error()
 		{
 			return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
+		}
+
+		/// <summary>
+		/// Заполнение связанного свойства Subdivision у преподавателей (временная замена include)
+		/// </summary>
+		private void IncludeReferencedFieldsToLecturers()
+		{
+			var lecturersSubdivisions = new HashSet<int>(_dbContext.Lecturers.Select(x => x.SubdivisionId));
+			var allSubdivisions = _dbContext.Subdivisions.Where(x => lecturersSubdivisions.Contains(x.SubdivisionId)).ToDictionary(x => x.SubdivisionId, x => x);
+			foreach (var lecturer in _dbContext.Lecturers)
+			{
+				if (lecturer.Subdivision == null)
+				{
+					lecturer.Subdivision = allSubdivisions[lecturer.SubdivisionId];
+				}
+			}
 		}
 	}
 }

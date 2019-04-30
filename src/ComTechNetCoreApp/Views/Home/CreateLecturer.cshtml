@@ -5,7 +5,7 @@
 
 <h2>Добавление/изменение преподавателя</h2>
 <form asp-action="CreateLecturer" asp-controller="Home" method="post">
-    <input type="hidden" name="@nameof(Lecturer.LecturerId)"/>
+    <input type="hidden" asp-for="LecturerId" />
     <table>
         <tr>
             <td>
@@ -60,7 +60,7 @@
                 <label asp-for="WorkStartDate"></label>
             </td>
             <td>
-                <input asp-for="WorkStartDate" asp-format="{0:dd/MM/yyyy}"/>
+                <input asp-for="WorkStartDate" asp-format="{0:dd/MM/yyyy}" />
             </td>
         </tr>
         <tr>
@@ -72,4 +72,6 @@
             </td>
         </tr>
     </table>
+    <br />
+    <input type="submit" value="Обновить БД" />
 </form>

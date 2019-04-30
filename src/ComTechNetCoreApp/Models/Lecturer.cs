@@ -16,8 +16,9 @@ namespace ComTechNetCoreApp.Models
 		/// <summary>
 		/// Уникальный идентификатор кафедры.
 		/// </summary>
+		[Required]
 		public int SubdivisionId { get; set; }
-
+		
 		/// <summary>
 		/// Дата начала работы на кафедре.
 		/// </summary>
@@ -68,7 +69,6 @@ namespace ComTechNetCoreApp.Models
 		/// Кафедра.
 		/// </summary>
 		[NotMapped]
-		[Required]
 		[Display(Name = "Кафедра")]
 		public Subdivision Subdivision
 		{

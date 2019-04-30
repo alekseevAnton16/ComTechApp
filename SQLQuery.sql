@@ -21,3 +21,8 @@ create table Lecturers
 	WorkStartDate DATETIME not null,
 	SubdivisionId int not null,
 )
+
+alter table Lecturers
+add constraint subdivision_id
+foreign key (SubdivisionId)
+references Subdivisions(SubdivisionId)
