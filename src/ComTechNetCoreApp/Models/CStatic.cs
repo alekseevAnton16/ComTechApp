@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
 using NLog;
@@ -10,12 +9,9 @@ namespace ComTechNetCoreApp.Models
 	{
 		public static readonly ILogger Logger = LogManager.GetCurrentClassLogger();
 
-		public static string GetDisplayName(object enumValue)
-		{
-			return enumValue.GetType()
-				.GetMember(enumValue.ToString())?.FirstOrDefault()?
-				.GetCustomAttribute<DisplayAttribute>()?
-				.Name;
-		}
+		/// <summary>
+		/// Получает значение аттрибута displayName переданного объекта.
+		/// </summary>
+		public static string GetDisplayName(object value) => value.GetType().GetMember(value.ToString())?.FirstOrDefault()?.GetCustomAttribute<DisplayAttribute>()?.Name;
 	}
 }

@@ -63,7 +63,7 @@
                 <label asp-for="WorkStartDate"></label>
             </td>
             <td>
-                <input asp-for="WorkStartDate" asp-format="{0:dd/MM/yyyy}" />
+                <input asp-for="WorkStartDate" type="date" asp-format="{0:dd/MM/yyyy}" value="01/01/1960"/>
                 <span asp-validation-for="WorkStartDate" class="text-danger"></span>
             </td>
         </tr>

@@ -26,6 +26,7 @@ namespace ComTechNetCoreApp.Models
 		/// Дата начала работы на кафедре.
 		/// </summary>
 		[Display(Name = "Дата начала работы на кафедре")]
+		[DataType(DataType.Date)]
 		[Required]
 		public DateTime WorkStartDate { get; set; }
 

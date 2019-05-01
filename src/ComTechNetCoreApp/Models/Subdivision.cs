@@ -28,6 +28,7 @@ namespace ComTechNetCoreApp.Models
 		/// Год основания кафедры.
 		/// </summary>
 		[Display(Name = "Год основания кафедры")]
+		[DataType(DataType.Date)]
 		[Required]
 		public DateTime SubdivisionСreateYear { get; set; }
 
