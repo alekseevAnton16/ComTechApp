@@ -40,7 +40,7 @@ namespace ComTechNetCoreApp.Controllers
 			if (subdivision == null)
 			{
 				CStatic.Logger.Trace($"{nameof(GetSubdivisionAndLecturers)}, subdivision is null");
-				return StatusCode(404);
+				return RedirectToAction(nameof(Error));
 			}
 
 			var lecturers = _dbContext.Lecturers.Where(x => x.SubdivisionId == subdivisionId);
@@ -56,7 +56,7 @@ namespace ComTechNetCoreApp.Controllers
 			if (subdivision == null)
 			{
 				CStatic.Logger.Trace($"{nameof(EditSubdivision)}, subdivision is null");
-				return StatusCode(404);
+				return RedirectToAction(nameof(Error));
 			}
 
 			return View(nameof(CreateSubdivision), subdivision);
@@ -69,7 +69,7 @@ namespace ComTechNetCoreApp.Controllers
 			if (subdivision == null)
 			{
 				CStatic.Logger.Trace($"{nameof(DeleteSubdivision)}, subdivision is null");
-				return StatusCode(404);
+				return RedirectToAction(nameof(Error));
 			}
 
 			_dbContext.Subdivisions.Remove(subdivision);
@@ -92,7 +92,7 @@ namespace ComTechNetCoreApp.Controllers
 			if (!ModelState.IsValid || subdivision.SubdivisionСreateYear == default(DateTime))
 			{
 				CStatic.Logger.Warn($"Method {nameof(CreateSubdivision)}Post: model is invalid");
-				return StatusCode(403);
+				return RedirectToAction(nameof(Error));
 			}
 
 			CStatic.Logger.Trace($"{nameof(CreateLecturer)}Post: subdivisionId: {subdivision.SubdivisionId}, name: {subdivision.SubdivisionName}");
@@ -133,18 +133,15 @@ namespace ComTechNetCoreApp.Controllers
 			var lecturer = _dbContext.Lecturers.Find(id);
 			if (lecturer == null)
 			{
-				return StatusCode(404);
+				CStatic.Logger.Warn($"{nameof(GetLecturerById)}: lecturer is null");
+				return RedirectToAction(nameof(Error));
 			}
 
-			var subdivision = _dbContext.Subdivisions.Find(lecturer.SubdivisionId);
-			if (subdivision != null)
-			{
-				lecturer.Subdivision = subdivision;
-			}
+			lecturer.Subdivision = lecturer.Subdivision ?? _dbContext.Subdivisions.Find(lecturer.SubdivisionId);
 
 			return View(lecturer);
 		}
-
+		
 		[HttpGet]
 		public IActionResult EditLecturer(int id)
 		{
@@ -153,7 +150,7 @@ namespace ComTechNetCoreApp.Controllers
 			if (lecturer == null)
 			{
 				CStatic.Logger.Trace($"{nameof(EditLecturer)}, lecturer is null");
-				return StatusCode(404);
+				return RedirectToAction(nameof(Error));
 			}
 			
 			var allSubdivisions = _dbContext.Subdivisions.ToList();
@@ -169,7 +166,7 @@ namespace ComTechNetCoreApp.Controllers
 			if (lecturer == null)
 			{
 				CStatic.Logger.Trace($"{nameof(DeleteLecturer)}, lecturer is null");
-				return StatusCode(404);
+				return RedirectToAction(nameof(Error));
 			}
 
 			_dbContext.Lecturers.Remove(lecturer);
@@ -194,7 +191,7 @@ namespace ComTechNetCoreApp.Controllers
 			if (!ModelState.IsValid || lecturer.WorkStartDate == default(DateTime))
 			{
 				CStatic.Logger.Warn($"Method {nameof(CreateLecturer)}Post: model is invalid");
-				return StatusCode(403);
+				return RedirectToAction(nameof(Error));
 			}
 
 			CStatic.Logger.Trace($"{nameof(CreateLecturer)}Post: lectuerId: {lecturer.LecturerId}, surname: {lecturer.Surname}, name {lecturer.FirstName} ");
